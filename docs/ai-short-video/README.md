@@ -4,6 +4,12 @@
 
 本目录是知识库的权威文档树。仓库 Wiki 首页应链到本路径（见 [WIKI.md](./WIKI.md)）。
 
+## 怎么读
+
+1. 打开 [CURRENT.md](./CURRENT.md) 看最新可读
+2. 读最新 DIGEST / CHANGELOG（日摘要 / 版摘要）
+3. 需要细节再下钻原子稿；INDEX 与 `dimensions/*` 仅溯源
+
 ## 知识维度
 
 | 维度 | 目录 | 说明 |
@@ -33,6 +39,7 @@
 ## 快速导航
 
 - 当前版本指针：[CURRENT.md](./CURRENT.md)
+- 最新日摘要：[v0/inbox/2026-09-10/DIGEST.md](./v0/inbox/2026-09-10/DIGEST.md)
 - 当前脚手架版本：[v0/README.md](./v0/README.md)
 - 扫描草稿暂存：[v0/inbox/README.md](./v0/inbox/README.md)
 - Wiki 入口约定：[WIKI.md](./WIKI.md)

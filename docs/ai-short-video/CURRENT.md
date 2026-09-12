@@ -4,7 +4,7 @@
 
 默认阅读路径：**总览 → 日摘要 / 版摘要**。原子稿仅作溯源，不必逐篇打开。
 
-- 最新日摘要：[v0/inbox/2026-09-12/DIGEST.md](./v0/inbox/2026-09-12/DIGEST.md)
+- 最新日摘要：[v0/inbox/2026-09-12/DIGEST.md](./v0/inbox/2026-09-12/DIGEST.md)（含 15:00 PM 补扫）
 - 当前版本说明：[v0/README.md](./v0/README.md)
 
 正式版摘要在三日发版时写入 `vYYYY.MM.DD/CHANGELOG.md`。v0 为脚手架期，占位见 [v0/CHANGELOG.md](./v0/CHANGELOG.md)（尚无发版增量）。

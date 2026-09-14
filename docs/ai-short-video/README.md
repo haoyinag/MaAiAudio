@@ -40,7 +40,7 @@
 
 - 当前版本指针：[CURRENT.md](./CURRENT.md)
 - 最新版摘要：[v2026.09.13/CHANGELOG.md](./v2026.09.13/CHANGELOG.md)
-- 最新日摘要：[v0/inbox/2026-09-13/DIGEST.md](./v0/inbox/2026-09-13/DIGEST.md)（含下午补扫）
+- 最新日摘要：[v0/inbox/2026-09-14/DIGEST.md](./v0/inbox/2026-09-14/DIGEST.md)（上午双扫）
 - 扫描草稿暂存：[v0/inbox/README.md](./v0/inbox/README.md)
 - v0 脚手架（历史）：[v0/README.md](./v0/README.md)
 - Wiki 入口约定：[WIKI.md](./WIKI.md)

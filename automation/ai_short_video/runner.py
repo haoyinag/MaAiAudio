@@ -113,7 +113,8 @@ def run_codex(mode: str, worktree: Path) -> None:
 
 def changed_paths(worktree: Path) -> list[str]:
     paths = []
-    for line in git_output(["status", "--porcelain", "--untracked-files=all"], cwd=worktree).splitlines():
+    output = run([executable("git"), "-c", "core.quotepath=false", "status", "--porcelain", "--untracked-files=all"], cwd=worktree).stdout
+    for line in output.splitlines():
         if line:
             path = line[3:].replace("\\", "/")
             normalized = path.split(" -> ", 1)[-1]

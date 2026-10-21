@@ -7,7 +7,7 @@
 ## 怎么读
 
 1. 打开 [CURRENT.md](./CURRENT.md) 看最新可读
-2. 读最新 [版摘要 CHANGELOG](./v2026.09.13/CHANGELOG.md)（默认阅读层）；日摘要作溯源
+2. 读最新 [日摘要](./inbox/2026-10-21/DIGEST.md)；需要已发布快照时再读 [版摘要 CHANGELOG](./v2026.09.13/CHANGELOG.md)
 3. 需要细节再下钻原子稿；inbox INDEX 与日目录仅溯源
 
 ## 知识维度
@@ -40,7 +40,7 @@
 
 - 当前版本指针：[CURRENT.md](./CURRENT.md)
 - 最新版摘要：[v2026.09.13/CHANGELOG.md](./v2026.09.13/CHANGELOG.md)
-- 最新日摘要：[v0/inbox/2026-09-13/DIGEST.md](./v0/inbox/2026-09-13/DIGEST.md)
-- 扫描草稿暂存：[v0/inbox/README.md](./v0/inbox/README.md)
+- 最新日摘要：[inbox/2026-10-21/DIGEST.md](./inbox/2026-10-21/DIGEST.md)
+- 扫描草稿暂存：[inbox/README.md](./inbox/README.md)
 - v0 脚手架（历史）：[v0/README.md](./v0/README.md)
 - Wiki 入口约定：[WIKI.md](./WIKI.md)

@@ -1,0 +1,50 @@
+{
+  "timezone": "Asia/Shanghai",
+  "domestic_ratio": 0.65,
+  "max_candidates": 40,
+  "lookback_hours": 48,
+  "user_agent": "MaAiAudioResearchBot/1.0 (+https://github.com/haoyinag/MaAiAudio)",
+  "request_timeout_seconds": 20,
+  "queries": {
+    "domestic": [
+      "AI视频 制作 技巧",
+      "AI短剧 制作 流程",
+      "AI视频 平台 规则",
+      "AI短剧 增长 变现",
+      "生成式人工智能 视频 合规 标识",
+      "可灵 即梦 Seedance 视频 更新"
+    ],
+    "overseas": [
+      "AI video production workflow",
+      "AI short video platform policy",
+      "AI micro drama growth monetization",
+      "synthetic media disclosure policy",
+      "AI video model release workflow"
+    ]
+  },
+  "dimensions": {
+    "general": ["技巧", "方法", "提示词", "一致性", "workflow", "prompt", "consistency"],
+    "platforms": ["平台", "抖音", "红果", "快手", "小红书", "B站", "TikTok", "YouTube", "Shorts", "Instagram"],
+    "types": ["短剧", "漫剧", "口播", "剧情", "解说", "micro drama", "faceless", "vertical series"],
+    "pipeline": ["制作", "分镜", "生成", "剪辑", "发布", "模型", "storyboard", "editing", "pipeline", "generation"],
+    "growth": ["增长", "变现", "投流", "留存", "完播", "收入", "growth", "monetization", "retention", "revenue"],
+    "compliance": ["合规", "版权", "肖像", "标识", "备案", "审核", "policy", "copyright", "disclosure", "safety"]
+  },
+  "preferred_domains": [
+    "gov.cn",
+    "cac.gov.cn",
+    "nrta.gov.cn",
+    "douyin.com",
+    "kuaishou.com",
+    "bilibili.com",
+    "xiaohongshu.com",
+    "bytedance.com",
+    "seed.bytedance.com",
+    "klingai.com",
+    "youtube.com",
+    "support.google.com",
+    "tiktok.com",
+    "newsroom.tiktok.com",
+    "about.fb.com"
+  ]
+}

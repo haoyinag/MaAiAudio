@@ -72,10 +72,23 @@ def repair_mojibake(value: str) -> str:
         return value
 
 
-def classify(text: str, dimensions: dict[str, list[str]]) -> list[str]:
+def classify(text: str, dimensions: dict[str, list[str]], dimension_hint: str | None = None) -> list[str]:
     lowered = text.lower()
     matches = [name for name, words in dimensions.items() if any(word.lower() in lowered for word in words)]
+    if dimension_hint in dimensions and dimension_hint not in matches:
+        matches.append(dimension_hint)
     return matches or ["general"]
+
+
+def iter_queries(config: dict) -> Iterable[tuple[str, str | None, str]]:
+    for region, query_groups in config["queries"].items():
+        if isinstance(query_groups, list):
+            for query in query_groups:
+                yield region, None, query
+            continue
+        for dimension, queries in query_groups.items():
+            for query in queries:
+                yield region, dimension, query
 
 
 def parse_date(value: str | None) -> datetime | None:
@@ -179,16 +192,46 @@ def score_candidate(url: str, dimensions: list[str], preferred_domains: list[str
     return score
 
 
-def select_ratio(candidates: list[Candidate], domestic_ratio: float, limit: int) -> list[Candidate]:
-    domestic_limit = round(limit * domestic_ratio)
-    overseas_limit = limit - domestic_limit
-    domestic = sorted((item for item in candidates if item.region == "domestic"), key=lambda item: (-item.score, item.title))
-    overseas = sorted((item for item in candidates if item.region == "overseas"), key=lambda item: (-item.score, item.title))
-    selected = domestic[:domestic_limit] + overseas[:overseas_limit]
-    if len(selected) < limit:
-        selected_urls = {item.url for item in selected}
-        remainder = sorted((item for item in candidates if item.url not in selected_urls), key=lambda item: (-item.score, item.title))
-        selected.extend(remainder[: limit - len(selected)])
+def select_balanced(
+    candidates: list[Candidate],
+    domestic_ratio: float,
+    limit: int,
+    dimension_names: Iterable[str],
+    min_per_dimension: int,
+) -> list[Candidate]:
+    region_targets = {
+        "domestic": round(limit * domestic_ratio),
+        "overseas": limit - round(limit * domestic_ratio),
+    }
+    selected: list[Candidate] = []
+    selected_urls: set[str] = set()
+    region_counts = {"domestic": 0, "overseas": 0}
+
+    def add(item: Candidate) -> None:
+        selected.append(item)
+        selected_urls.add(item.url)
+        region_counts[item.region] = region_counts.get(item.region, 0) + 1
+
+    def rank(item: Candidate) -> tuple[bool, int, str]:
+        region_full = region_counts.get(item.region, 0) >= region_targets.get(item.region, limit)
+        return region_full, -item.score, item.title
+
+    for dimension in dimension_names:
+        while sum(dimension in item.dimensions for item in selected) < min_per_dimension and len(selected) < limit:
+            choices = [
+                item for item in candidates
+                if item.url not in selected_urls and dimension in item.dimensions
+            ]
+            if not choices:
+                break
+            add(min(choices, key=rank))
+
+    while len(selected) < limit:
+        choices = [item for item in candidates if item.url not in selected_urls]
+        if not choices:
+            break
+        add(min(choices, key=rank))
+
     return sorted(selected, key=lambda item: (-item.score, item.region, item.title))
 
 
@@ -200,47 +243,61 @@ def collect(config: dict, state_db: Path, output: Path, since: datetime | None =
     candidates_by_url: dict[str, Candidate] = {}
     errors: list[str] = []
     try:
-        for region, queries in config["queries"].items():
-            for query in queries:
-                for feed_url in build_feeds(query, region):
-                    if not may_fetch(feed_url, config["user_agent"], robots_cache):
-                        errors.append(f"robots denied: {feed_url}")
+        for region, dimension_hint, query in iter_queries(config):
+            for feed_url in build_feeds(query, region):
+                if not may_fetch(feed_url, config["user_agent"], robots_cache):
+                    errors.append(f"robots denied: {feed_url}")
+                    continue
+                try:
+                    items = list(parse_feed(fetch(feed_url, config["user_agent"], config["request_timeout_seconds"])))
+                except (ET.ParseError, OSError, urllib.error.URLError, ValueError) as exc:
+                    errors.append(f"{feed_url}: {type(exc).__name__}: {exc}")
+                    continue
+                for title, raw_url, published_raw, summary in items:
+                    published = parse_date(published_raw)
+                    if published and published < cutoff:
                         continue
-                    try:
-                        items = list(parse_feed(fetch(feed_url, config["user_agent"], config["request_timeout_seconds"])))
-                    except (ET.ParseError, OSError, urllib.error.URLError, ValueError) as exc:
-                        errors.append(f"{feed_url}: {type(exc).__name__}: {exc}")
+                    url = canonicalize_url(raw_url)
+                    title = repair_mojibake(html.unescape(title)).strip()
+                    clean_summary = " ".join(repair_mojibake(html.unescape(summary)).split())[:1000]
+                    fingerprint = text_fingerprint(title, clean_summary)
+                    if url in candidates_by_url or is_seen(connection, url, fingerprint):
                         continue
-                    for title, raw_url, published_raw, summary in items:
-                        published = parse_date(published_raw)
-                        if published and published < cutoff:
-                            continue
-                        url = canonicalize_url(raw_url)
-                        title = repair_mojibake(html.unescape(title)).strip()
-                        clean_summary = " ".join(repair_mojibake(html.unescape(summary)).split())[:1000]
-                        fingerprint = text_fingerprint(title, clean_summary)
-                        if url in candidates_by_url or is_seen(connection, url, fingerprint):
-                            continue
-                        dimensions = classify(f"{title} {clean_summary}", config["dimensions"])
-                        candidates_by_url[url] = Candidate(
-                            title=title,
-                            url=url,
-                            published_at=published.isoformat() if published else None,
-                            collected_at=now.isoformat(),
-                            region=region,
-                            dimensions=dimensions,
-                            source_query=query,
-                            source_feed=feed_url,
-                            summary=clean_summary,
-                            score=score_candidate(url, dimensions, config["preferred_domains"], published),
-                            fingerprint=fingerprint,
-                        )
-        selected = select_ratio(list(candidates_by_url.values()), float(config["domestic_ratio"]), int(config["max_candidates"]))
+                    dimensions = classify(f"{title} {clean_summary}", config["dimensions"], dimension_hint)
+                    candidates_by_url[url] = Candidate(
+                        title=title,
+                        url=url,
+                        published_at=published.isoformat() if published else None,
+                        collected_at=now.isoformat(),
+                        region=region,
+                        dimensions=dimensions,
+                        source_query=query,
+                        source_feed=feed_url,
+                        summary=clean_summary,
+                        score=score_candidate(url, dimensions, config["preferred_domains"], published),
+                        fingerprint=fingerprint,
+                    )
+        selected = select_balanced(
+            list(candidates_by_url.values()),
+            float(config["domestic_ratio"]),
+            int(config["max_candidates"]),
+            config["dimensions"],
+            int(config.get("min_candidates_per_dimension", 0)),
+        )
+        coverage = {
+            dimension: sum(dimension in item.dimensions for item in selected)
+            for dimension in config["dimensions"]
+        }
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(json.dumps({
             "generated_at": now.isoformat(),
             "cutoff": cutoff.isoformat(),
             "candidate_count": len(selected),
+            "coverage": coverage,
+            "region_counts": {
+                region: sum(item.region == region for item in selected)
+                for region in ("domestic", "overseas")
+            },
             "errors": errors,
             "candidates": [asdict(item) for item in selected],
         }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

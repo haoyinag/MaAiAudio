@@ -1,26 +1,28 @@
 {
   "timezone": "Asia/Shanghai",
   "domestic_ratio": 0.65,
-  "max_candidates": 40,
+  "max_candidates": 72,
+  "min_candidates_per_dimension": 8,
   "lookback_hours": 48,
   "user_agent": "MaAiAudioResearchBot/1.0 (+https://github.com/haoyinag/MaAiAudio)",
   "request_timeout_seconds": 20,
   "queries": {
-    "domestic": [
-      "AI视频 制作 技巧",
-      "AI短剧 制作 流程",
-      "AI视频 平台 规则",
-      "AI短剧 增长 变现",
-      "生成式人工智能 视频 合规 标识",
-      "可灵 即梦 Seedance 视频 更新"
-    ],
-    "overseas": [
-      "AI video production workflow",
-      "AI short video platform policy",
-      "AI micro drama growth monetization",
-      "synthetic media disclosure policy",
-      "AI video model release workflow"
-    ]
+    "domestic": {
+      "general": ["AI视频 通用技巧 提示词 一致性", "AI视频 创作方法 角色一致性"],
+      "platforms": ["AI视频 抖音 红果 快手 小红书 B站 规则 运营", "AI短剧 平台 推荐 审核"],
+      "types": ["AI短剧 漫剧 口播 解说 类型打法", "AI视频 竖屏短剧 无脸内容"],
+      "pipeline": ["AI视频 制作流程 分镜 剪辑", "可灵 即梦 Seedance 视频 更新"],
+      "growth": ["AI短剧 增长 变现 投流 留存 完播", "AI视频 账号运营 商业化"],
+      "compliance": ["生成式人工智能 视频 合规 标识 备案", "AI视频 版权 肖像 声音 平台审核"]
+    },
+    "overseas": {
+      "general": ["AI video prompting consistency techniques", "AI video storytelling best practices"],
+      "platforms": ["TikTok YouTube Shorts Instagram AI video policy creator tips", "AI video platform recommendation policy"],
+      "types": ["AI micro drama faceless vertical series techniques", "AI video format genre storytelling"],
+      "pipeline": ["AI video production workflow storyboard editing", "AI video model release production workflow"],
+      "growth": ["AI short video growth monetization retention", "AI micro drama audience revenue strategy"],
+      "compliance": ["synthetic media disclosure copyright policy", "AI video likeness voice safety regulation"]
+    }
   },
   "dimensions": {
     "general": ["技巧", "方法", "提示词", "一致性", "workflow", "prompt", "consistency"],

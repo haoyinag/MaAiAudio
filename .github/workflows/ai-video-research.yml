@@ -1,0 +1,289 @@
+name: AI short-video research
+
+on:
+  schedule:
+    - cron: "37 0 * * *"
+    - cron: "17 4 * * *"
+    - cron: "13 2 * * *"
+    - cron: "43 6 * * *"
+    - cron: "17 3 * * 1"
+    - cron: "47 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Research mode to run
+        required: true
+        type: choice
+        options:
+          - daily
+          - release
+          - audit
+      force:
+        description: Run even when today's output or interval says it is not due
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ai-video-research-${{ github.event.schedule || inputs.mode || 'manual' }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      mode: ${{ steps.plan.outputs.mode }}
+      date: ${{ steps.plan.outputs.date }}
+      prompt_file: ${{ steps.plan.outputs.prompt_file }}
+      should_run: ${{ steps.plan.outputs.should_run }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: master
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - id: plan
+        name: Resolve mode and idempotency
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+          INPUT_MODE: ${{ inputs.mode }}
+          INPUT_FORCE: ${{ inputs.force }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          export TZ=Asia/Shanghai
+          run_date="$(date +%F)"
+          force="${INPUT_FORCE:-false}"
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            mode="$INPUT_MODE"
+          else
+            case "$EVENT_SCHEDULE" in
+              "37 0 * * *"|"17 4 * * *") mode="daily" ;;
+              "13 2 * * *"|"43 6 * * *") mode="release" ;;
+              "17 3 * * 1"|"47 7 * * 1") mode="audit" ;;
+              *) echo "Unknown schedule: $EVENT_SCHEDULE" >&2; exit 1 ;;
+            esac
+          fi
+          args=(plan --mode "$mode" --date "$run_date")
+          if [[ "$force" == "true" ]]; then args+=(--force); fi
+          plan_json="$(python automation/ai_short_video/ci_runner.py "${args[@]}")"
+          should_run="$(python -c 'import json,sys; print(json.load(sys.stdin)["should_run"])' <<<"$plan_json")"
+          if [[ "$force" != "true" ]]; then
+            existing="$(gh pr list --repo "$GITHUB_REPOSITORY" --state all --limit 100 --json headRefName --jq "[.[] | select(.headRefName | startswith(\"research/${mode}-${run_date}\"))] | length")"
+            if [[ "$existing" != "0" ]]; then should_run="false"; fi
+          fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "date=$run_date" >> "$GITHUB_OUTPUT"
+          echo "prompt_file=automation/ai_short_video/prompts/${mode}.md" >> "$GITHUB_OUTPUT"
+          echo "should_run=$should_run" >> "$GITHUB_OUTPUT"
+
+  generate:
+    needs: plan
+    if: needs.plan.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 190
+    outputs:
+      has_changes: ${{ steps.patch.outputs.has_changes }}
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: master
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Require OpenAI API secret
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        shell: bash
+        run: |
+          if [[ -z "$OPENAI_API_KEY" ]]; then
+            echo "Repository secret OPENAI_API_KEY is required." >&2
+            exit 1
+          fi
+
+      - name: Prepare policy and discovery candidates
+        run: >-
+          python automation/ai_short_video/ci_runner.py prepare
+          --mode "${{ needs.plan.outputs.mode }}"
+          --date "${{ needs.plan.outputs.date }}"
+
+      - name: Run Codex research
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt-file: ${{ needs.plan.outputs.prompt_file }}
+          working-directory: ${{ github.workspace }}
+          permission-profile: ":workspace"
+          safety-strategy: drop-sudo
+
+      - name: Validate generated scope and required outputs
+        run: >-
+          python automation/ai_short_video/ci_runner.py validate
+          --mode "${{ needs.plan.outputs.mode }}"
+          --date "${{ needs.plan.outputs.date }}"
+
+      - id: patch
+        name: Build review-only patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -N -- docs/ai-short-video
+          git diff --binary --full-index HEAD -- docs/ai-short-video > ai-video-research.patch
+          if [[ -s ai-video-research.patch ]]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: steps.patch.outputs.has_changes == 'true'
+        with:
+          name: ai-video-research-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ai-video-research.patch
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs:
+      - plan
+      - generate
+    if: needs.generate.outputs.has_changes == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: ai-video-research-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .automation/artifacts
+
+      - name: Apply and validate generated patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git apply --index .automation/artifacts/ai-video-research.patch
+          python automation/ai_short_video/ci_runner.py validate \
+            --mode "${{ needs.plan.outputs.mode }}" \
+            --date "${{ needs.plan.outputs.date }}"
+
+      - id: publish
+        name: Commit, push, and open review PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MODE: ${{ needs.plan.outputs.mode }}
+          RUN_DATE: ${{ needs.plan.outputs.date }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch="research/${MODE}-${RUN_DATE}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git commit -m "docs(ai-short-video): ${MODE} ${RUN_DATE}"
+          git push --set-upstream origin "$branch"
+          url="$(gh pr create \
+            --base master \
+            --head "$branch" \
+            --title "AI short-video ${MODE}: ${RUN_DATE}" \
+            --body "Automated research candidate for human review.\n\n- Base: \`master\`\n- Auto-merge: disabled\n- Scope: \`docs/ai-short-video/\`\n- Workflow: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}")"
+          echo "PR created: $url"
+
+  report_failure:
+    needs:
+      - plan
+      - generate
+      - publish
+    if: always() && (needs.plan.result == 'failure' || needs.generate.result == 'failure' || needs.publish.result == 'failure')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const title = "AI short-video automation failure";
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const body = `The scheduled research workflow failed.\n\nRun: ${runUrl}\nAttempt: ${context.runAttempt}\n\nReview the failed stage and use workflow_dispatch after correction.`;
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              per_page: 100,
+            });
+            const existing = issues.find(issue => !issue.pull_request && issue.title === title);
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+              });
+            }
+
+  close_failure_report:
+    needs:
+      - plan
+      - generate
+      - publish
+    if: always() && needs.plan.result == 'success' && (needs.generate.result == 'success' || needs.generate.result == 'skipped') && (needs.publish.result == 'success' || needs.publish.result == 'skipped')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const title = "AI short-video automation failure";
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              per_page: 100,
+            });
+            for (const issue of issues.filter(issue => !issue.pull_request && issue.title === title)) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `Recovered in ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}.`,
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: "closed",
+              });
+            }

@@ -7,7 +7,7 @@
 Wiki 首页（`Home`）默认应链到 **CURRENT + 最新 CHANGELOG + 最新 DIGEST**，让浏览入口直接落到摘要层：
 
 - 当前版本 / 最新可读：`docs/ai-short-video/CURRENT.md`
-- 最新版摘要：`docs/ai-short-video/v2026.09.13/CHANGELOG.md`
+- 最近正式版摘要：`docs/ai-short-video/v2026.11.14/CHANGELOG.md`
 - 最新日摘要：`docs/ai-short-video/inbox/2026-11-11/DIGEST.md`
 - 知识库总述：`docs/ai-short-video/README.md`
 
@@ -23,7 +23,7 @@ Wiki 首页（`Home`）默认应链到 **CURRENT + 最新 CHANGELOG + 最新 DIG
 权威文档在仓库 docs，不在 Wiki 正文中维护。
 
 - [当前版本 / 最新可读](../blob/master/docs/ai-short-video/CURRENT.md)
-- [最新版摘要 · v2026.09.13](../blob/master/docs/ai-short-video/v2026.09.13/CHANGELOG.md)
+- [最近正式版摘要 · v2026.11.14](../blob/master/docs/ai-short-video/v2026.11.14/CHANGELOG.md)
 - [最新日摘要 · 2026-11-11](../blob/master/docs/ai-short-video/inbox/2026-11-11/DIGEST.md)
 - [知识库总述](../blob/master/docs/ai-short-video/README.md)
 - [v0 脚手架 / inbox 溯源](../blob/master/docs/ai-short-video/v0/README.md)

@@ -169,7 +169,7 @@ def sync_local_master() -> None:
 
 
 def prepare_worktree(mode: str, date_text: str) -> tuple[str, Path]:
-    branch = select_branch(mode, date_text)
+    branch = f"research/{mode}-{date_text}"
     worktree = WORKTREES_DIR / f"{mode}-{date_text}"
     if worktree.exists():
         if git_output(["status", "--porcelain"], cwd=worktree):
@@ -177,8 +177,7 @@ def prepare_worktree(mode: str, date_text: str) -> tuple[str, Path]:
         git_output(["worktree", "remove", "--force", str(worktree)])
     git_output(["fetch", "origin", "master"])
     sync_local_master()
-    start = f"origin/{branch}" if branch_exists_remote(branch) else "origin/master"
-    git_output(["worktree", "add", "-B", branch, str(worktree), start])
+    git_output(["worktree", "add", "-B", branch, str(worktree), "origin/master"])
     return branch, worktree
 
 def stage_policy(worktree: Path) -> None:
@@ -267,48 +266,47 @@ def publish(mode: str, date_text: str, branch: str, worktree: Path) -> str | Non
     git = executable("git")
     run([git, "add", "--", "docs/ai-short-video"], cwd=worktree)
     run([git, "commit", "-m", f"docs(ai-short-video): {mode} {date_text}"], cwd=worktree)
-    run([git, "push", "--set-upstream", "origin", branch], cwd=worktree)
-    existing_pr = open_pr_url(branch, worktree)
-    if existing_pr:
-        return existing_pr
-    title = f"AI short-video {mode}: {date_text}"
-    body = "Automated research candidate for human review.\n\n- Base: `master`\n- Auto-merge: disabled\n- Scope: `docs/ai-short-video/`"
-    return run([executable("gh"), "pr", "create", "--base", "master", "--head", branch, "--title", title, "--body", body], cwd=worktree).stdout.strip()
+    run([git, "push", "origin", "HEAD:master"], cwd=worktree)
+    commit_sha = git_output(["rev-parse", "HEAD"], cwd=worktree)
+    sync_local_master()
+    return commit_sha
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Run isolated AI short-video research and open a review PR.")
+    parser = argparse.ArgumentParser(description="Run isolated AI short-video research and push validated changes to master.")
     parser.add_argument("mode", choices=("daily", "release", "audit"))
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
     now = datetime.now(timezone(timedelta(hours=8), name="Asia/Shanghai"))
     date_text = now.strftime("%Y-%m-%d")
     if args.dry_run:
-        for name in ("python", "git", "gh", "codex.cmd"):
+        for name in ("python", "git", "codex.cmd"):
             print(f"{name}: {executable(name)}")
         print(f"mode={args.mode} date={date_text} root={ROOT}")
         return 0
     with exclusive_lock(LOCK_FILE):
-        assert_github_auth()
         state = load_run_state()
         worktree: Path | None = None
+        branch: str | None = None
         try:
             branch, worktree = prepare_worktree(args.mode, date_text)
             stage_policy(worktree)
             if args.mode == "daily":
                 copy_daily_candidates(worktree, state)
             run_codex(args.mode, worktree)
-            pr_url = publish(args.mode, date_text, branch, worktree)
+            commit_sha = publish(args.mode, date_text, branch, worktree)
             if args.mode == "daily":
                 collector.mark_candidates_seen(collector.STATE_DB, collector.CANDIDATES_FILE)
-            state[args.mode] = {"completed_at": now.isoformat(), "branch": branch, "pr_url": pr_url}
+            state[args.mode] = {"completed_at": now.isoformat(), "branch": "master", "commit": commit_sha}
             save_run_state(state)
-            print(pr_url or "No verified changes; no PR created.")
+            print(f"Pushed to master: {commit_sha}" if commit_sha else "No verified changes; nothing pushed.")
         finally:
             if worktree and worktree.exists():
                 try:
                     git_output(["worktree", "remove", "--force", str(worktree)])
                 except CommandError as exc:
                     print(f"warning: failed to remove worktree: {exc}", file=sys.stderr)
+            if branch:
+                subprocess.run([executable("git"), "branch", "-D", branch], cwd=ROOT, capture_output=True)
     return 0
 
 if __name__ == "__main__":

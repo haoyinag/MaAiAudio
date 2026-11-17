@@ -22,7 +22,7 @@ foreach ($definition in $definitions) {
     }
     $action = New-ScheduledTaskAction -Execute $python -Argument "`"$runner`" $($definition.Mode)" -WorkingDirectory $repoRoot
     $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Hours 4)
-    Register-ScheduledTask -TaskName $definition.Name -Action $action -Trigger $definition.Trigger -Settings $settings -Description 'AI short-video research; creates review-only GitHub PRs.' -Force | Out-Null
+    Register-ScheduledTask -TaskName $definition.Name -Action $action -Trigger $definition.Trigger -Settings $settings -Description 'AI short-video research; validates in isolated worktree and pushes directly to master.' -Force | Out-Null
 }
 
 if ($Uninstall) {

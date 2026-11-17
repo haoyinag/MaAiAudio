@@ -1,13 +1,6 @@
 name: AI short-video research
 
 on:
-  schedule:
-    - cron: "37 0 * * *"
-    - cron: "17 4 * * *"
-    - cron: "13 2 * * *"
-    - cron: "43 6 * * *"
-    - cron: "17 3 * * 1"
-    - cron: "47 7 * * 1"
   workflow_dispatch:
     inputs:
       mode:
@@ -193,26 +186,18 @@ jobs:
             --date "${{ needs.plan.outputs.date }}"
 
       - id: publish
-        name: Commit, push, and open review PR
+        name: Commit and push directly to master
         env:
-          GH_TOKEN: ${{ github.token }}
           MODE: ${{ needs.plan.outputs.mode }}
           RUN_DATE: ${{ needs.plan.outputs.date }}
         shell: bash
         run: |
           set -euo pipefail
-          branch="research/${MODE}-${RUN_DATE}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git switch -c "$branch"
           git commit -m "docs(ai-short-video): ${MODE} ${RUN_DATE}"
-          git push --set-upstream origin "$branch"
-          url="$(gh pr create \
-            --base master \
-            --head "$branch" \
-            --title "AI short-video ${MODE}: ${RUN_DATE}" \
-            --body "Automated research candidate for human review.\n\n- Base: \`master\`\n- Auto-merge: disabled\n- Scope: \`docs/ai-short-video/\`\n- Workflow: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}")"
-          echo "PR created: $url"
+          git push origin HEAD:master
+          echo "Pushed ${MODE} ${RUN_DATE} directly to master"
 
   report_failure:
     needs:

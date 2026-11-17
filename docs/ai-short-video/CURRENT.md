@@ -5,11 +5,18 @@
 - **唯一当前最佳实践主文档**：[PLAYBOOK.md](./PLAYBOOK.md)
   - 持续整合全库已核验的**端到端 7 步制作 SOP、主流模型分镜路由表、四大赛道作战卡、8 大行业困境与避坑边界、变现分账模型与上线前 10 项门禁清单**。日常动手做视频请直接查阅该手册。
 
+---
+
+## 最新可读（每日增量）
+
+默认阅读路径：**PLAYBOOK（全局最佳实践） → CURRENT → 日 DIGEST**。原子稿仅作溯源，不必逐篇打开。
+
 - 最新日摘要：[inbox/2026-11-16/DIGEST.md](./inbox/2026-11-16/DIGEST.md)
+- 最近周审计：[audits/2026-11-16.md](./audits/2026-11-16.md)
 
 ### 一句话结论
 
-今日把六维增量落到可检查边界：不需要台词或 BGM 时显式禁止；Reimagine 回链不等于授权；audio-first 内容先锁定转录区间；Seedance Draft 在有效期内审批转正式；YouTube 2027 入驻、活跃与月度收益分开核算；机密素材不进入会留存和人工审核的内置 AI 入口。
+生成默认值要显式控制（万相 3.0 不需要台词或 BGM 时不能只留空，须写显式空约束）、低成本预览与正式产出要分阶段（Seedance 2.5 Draft 样片任务 ID 有效期为 14 天）、平台入口与数据责任拆开看（YouTube Reimagine 回链不等于授权，平台内置 AI 功能不应输入机密/未脱敏资料）；同时 YouTube 2027 YPP 官方页面明确区分新创作者入驻、既有频道活跃与 Shorts 月度池收益（过去 90 天 1,000 万合格观看）四套门槛。
 
 ### 当日原子稿（溯源）
 
@@ -41,11 +48,8 @@
 
 ## 最近正式发版
 
-最近一次三日发版仍是 **v2026.09.13**（覆盖当时 `v0/inbox` 2026-09-10～09-13）。2026-11-16 为最新日 inbox，**不是**新的正式版本。
-
-- 版摘要：[v2026.11.14/CHANGELOG.md](./v2026.11.14/CHANGELOG.md)
-- 版本说明：[v2026.11.14/README.md](./v2026.11.14/README.md)
-- 六维精选：[v2026.11.14/dimensions/README.md](./v2026.11.14/dimensions/README.md)
+- 最新三日发版：**[v2026.11.14](./v2026.11.14/README.md)**（版摘要见 [v2026.11.14/CHANGELOG.md](./v2026.11.14/CHANGELOG.md)，复核记录见 [v2026.11.14/VERIFICATION.md](./v2026.11.14/VERIFICATION.md)）
+- 首个基线正式版：**[v2026.09.13](./v2026.09.13/README.md)**（版摘要见 [v2026.09.13/CHANGELOG.md](./v2026.09.13/CHANGELOG.md)）
 
 ## 路径约定
 
@@ -59,7 +63,7 @@
 | Wiki 入口说明 | `docs/ai-short-video/WIKI.md` | Wiki 首页应链到本知识库 |
 | 每日 inbox | `docs/ai-short-video/inbox/` | 2026-09-17 起的扫描草稿；最新为 2026-11-16 |
 | 日摘要 | `docs/ai-short-video/inbox/YYYY-MM-DD/DIGEST.md` | 当日总览；原子稿仅溯源 |
-| 最近正式快照 | `docs/ai-short-video/v2026.11.14/` | 三日发版产物；与最新日 inbox 分开导航 |
+| 最近正式快照 | `docs/ai-short-video/v2026.11.14/` | 最新三日发版产物（基线大版为 `v2026.09.13/`） |
 | 历史扫描草稿 | `docs/ai-short-video/v0/inbox/` | 2026-09-10～09-13 积累；不删除 |
 
 六个维度目录名固定为：`general`、`platforms`、`types`、`pipeline`、`growth`、`compliance`。引用条目时使用仓库相对路径，不在正文写本机绝对路径。

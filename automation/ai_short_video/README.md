@@ -1,36 +1,35 @@
 # AI short-video automation
 
-The primary scheduler is `.github/workflows/ai-video-research.yml`. It runs on GitHub-hosted infrastructure, so the local Windows machine does not need to be powered on.
+The primary scheduler is the local Windows Task Scheduler (`automation/ai_short_video/install_schedules.ps1`), which uses your local Codex CLI session and commits validated `docs/ai-short-video/` updates directly to `master` (eliminating daily PR merge conflicts) while keeping your local working tree in sync.
+
+`.github/workflows/ai-video-research.yml` is retained as an on-demand manual workflow (`workflow_dispatch`) so it does not consume duplicate quota or open conflicting PRs.
 
 ## Schedule (Asia/Shanghai)
 
-- Daily discovery: 08:37, with a 12:17 idempotent catch-up check.
-- Release eligibility: 10:13, with a 14:43 catch-up check. A release runs only when the latest formal version is at least three days old.
-- Weekly audit: Monday 11:17, with a 15:47 idempotent catch-up check.
-- Manual recovery: Actions → AI short-video research → Run workflow, then select `daily`, `release`, or `audit`. Use `force` only when intentionally rerunning an already completed date.
-
-## Required repository setup
-
-1. Add an Actions secret named `OPENAI_API_KEY` in repository settings. Never commit or paste the key into workflow files or logs.
-2. Allow GitHub Actions to create pull requests and grant workflow write permissions where repository or organization policy requires it.
-3. Keep automatic merging disabled; every generated PR remains review-only.
-
-The workflow separates the Codex generation job from publication. The generation job receives the API secret but has read-only repository permission. The publication job receives only the validated patch and has no OpenAI credential.
+- Daily discovery: 08:30 (`StartWhenAvailable` catch-up enabled if the machine was asleep/off).
+- Release eligibility: Every 3 days at 10:00 (consolidates new inbox entries into `vYYYY.MM.DD/` and rolls forward `docs/ai-short-video/PLAYBOOK.md`).
+- Weekly audit: Monday 11:00.
+- Manual cloud run (optional): Actions → AI short-video research → Run workflow (`daily`, `release`, or `audit`).
 
 ## Reliability behavior
 
-- GitHub Actions concurrency prevents the same schedule from overlapping.
-- The second daily/release/audit schedule is a catch-up check; it skips when a matching PR or merged run already exists.
-- Failures create or update the `AI short-video automation failure` issue. A later successful run closes it.
-- Each run reconstructs its state from the repository and pull requests instead of depending on one machine's `.automation` directory.
-- Local fallback runs reclaim dead-PID lock files, time out long child processes, remove clean stale worktrees, and use a retry branch when the date's original PR is already closed.
+- Runs execute in an isolated temporary Git worktree starting from `origin/master`.
+- Strict scope validation (`validate_scope`) ensures Codex can only modify files under `docs/ai-short-video/` and must pass `git diff --check`.
+- Candidate URLs are marked as `seen` in `.automation/ai-short-video/state.sqlite3` only after Codex succeeds and validation passes, preventing candidate loss on transient failures or quota limits.
+- Validated commits push directly to `origin/master` and automatically fast-forward the local `master` checkout when clean.
 
-## Local fallback
+## Managing local schedules
 
-The Windows scheduled tasks are temporary fallback only. Once a cloud run has generated a valid review PR, remove them with:
+Install or update the Windows scheduled tasks:
 
 ```powershell
-.\automation\ai_short_video\install_schedules.ps1 -Uninstall
+powershell -ExecutionPolicy Bypass -File automation\ai_short_video\install_schedules.ps1
+```
+
+Remove the Windows scheduled tasks:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File automation\ai_short_video\install_schedules.ps1 -Uninstall
 ```
 
 For a dependency-only check without running research:

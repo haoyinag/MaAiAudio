@@ -235,7 +235,32 @@ def select_balanced(
     return sorted(selected, key=lambda item: (-item.score, item.region, item.title))
 
 
-def collect(config: dict, state_db: Path, output: Path, since: datetime | None = None) -> tuple[list[Candidate], list[str]]:
+def mark_candidates_seen(state_db: Path, candidates_file: Path) -> int:
+    if not candidates_file.exists():
+        return 0
+    payload = json.loads(candidates_file.read_text(encoding="utf-8"))
+    items = payload.get("candidates", [])
+    if not items:
+        return 0
+    connection = init_db(state_db)
+    try:
+        with connection:
+            connection.executemany(
+                "INSERT OR IGNORE INTO seen(url, fingerprint, first_seen) VALUES (?, ?, ?)",
+                [(item["url"], item["fingerprint"], item["collected_at"]) for item in items],
+            )
+        return len(items)
+    finally:
+        connection.close()
+
+
+def collect(
+    config: dict,
+    state_db: Path,
+    output: Path,
+    since: datetime | None = None,
+    mark_seen: bool = True,
+) -> tuple[list[Candidate], list[str]]:
     now = datetime.now(timezone.utc)
     cutoff = since or now - timedelta(hours=int(config["lookback_hours"]))
     connection = init_db(state_db)
@@ -301,11 +326,12 @@ def collect(config: dict, state_db: Path, output: Path, since: datetime | None =
             "errors": errors,
             "candidates": [asdict(item) for item in selected],
         }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        with connection:
-            connection.executemany(
-                "INSERT OR IGNORE INTO seen(url, fingerprint, first_seen) VALUES (?, ?, ?)",
-                [(item.url, item.fingerprint, item.collected_at) for item in selected],
-            )
+        if mark_seen:
+            with connection:
+                connection.executemany(
+                    "INSERT OR IGNORE INTO seen(url, fingerprint, first_seen) VALUES (?, ?, ?)",
+                    [(item.url, item.fingerprint, item.collected_at) for item in selected],
+                )
         return selected, errors
     finally:
         connection.close()

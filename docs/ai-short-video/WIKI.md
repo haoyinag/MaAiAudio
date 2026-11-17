@@ -4,11 +4,12 @@
 
 ## 约定
 
-Wiki 首页（`Home`）默认应链到 **CURRENT + 最新 CHANGELOG + 最新 DIGEST**，让浏览入口直接落到摘要层：
+Wiki 首页（`Home`）默认应链到 **PLAYBOOK + CURRENT + 最新 CHANGELOG + 最新 DIGEST**，让浏览入口直接落到实战手册与摘要层：
 
+- 当下最佳实践手册：`docs/ai-short-video/PLAYBOOK.md`
 - 当前版本 / 最新可读：`docs/ai-short-video/CURRENT.md`
-- 最新版摘要：`docs/ai-short-video/v2026.09.13/CHANGELOG.md`
-- 最新日摘要：`docs/ai-short-video/inbox/2026-11-12/DIGEST.md`
+- 最新版摘要：`docs/ai-short-video/v2026.11.14/CHANGELOG.md`（基线大版：`docs/ai-short-video/v2026.09.13/CHANGELOG.md`）
+- 最新日摘要：`docs/ai-short-video/inbox/2026-11-16/DIGEST.md`
 - 知识库总述：`docs/ai-short-video/README.md`
 
 建议首页只放导航，不另写一份会漂移的正文副本。原子稿不作为 Wiki 默认入口。
@@ -22,9 +23,11 @@ Wiki 首页（`Home`）默认应链到 **CURRENT + 最新 CHANGELOG + 最新 DIG
 
 权威文档在仓库 docs，不在 Wiki 正文中维护。
 
+- [当下全局最佳实践手册 · PLAYBOOK](../blob/master/docs/ai-short-video/PLAYBOOK.md)
 - [当前版本 / 最新可读](../blob/master/docs/ai-short-video/CURRENT.md)
-- [最新版摘要 · v2026.09.13](../blob/master/docs/ai-short-video/v2026.09.13/CHANGELOG.md)
-- [最新日摘要 · 2026-11-12](../blob/master/docs/ai-short-video/inbox/2026-11-12/DIGEST.md)
+- [最新版摘要 · v2026.11.14](../blob/master/docs/ai-short-video/v2026.11.14/CHANGELOG.md)
+- [基线大版摘要 · v2026.09.13](../blob/master/docs/ai-short-video/v2026.09.13/CHANGELOG.md)
+- [最新日摘要 · 2026-11-16](../blob/master/docs/ai-short-video/inbox/2026-11-16/DIGEST.md)
 - [知识库总述](../blob/master/docs/ai-short-video/README.md)
 - [v0 脚手架 / inbox 溯源](../blob/master/docs/ai-short-video/v0/README.md)
 

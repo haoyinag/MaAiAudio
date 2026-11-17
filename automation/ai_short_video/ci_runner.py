@@ -101,6 +101,10 @@ def validate(mode: str, run_date: date) -> list[str]:
         missing = [str(path.relative_to(ROOT)) for path in required if not path.exists()]
         if missing:
             raise CiError(f"Daily output is missing required files: {missing}")
+    if mode == "release" and paths:
+        playbook = DOCS_ROOT / "PLAYBOOK.md"
+        if not playbook.exists():
+            raise CiError("Release output is missing required file: docs/ai-short-video/PLAYBOOK.md")
     return paths
 
 

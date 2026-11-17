@@ -1,7 +1,7 @@
 # 制作管线：AIGC 视频质检按参考一致性与异常时间区间分流
 
 - **主维度：** `pipeline`（制作管线）
-- **来源 URL：** https://docs.volcengine.com/docs/Intelligentprocessing/aigc-video-generation-quality-assessment?lang=zh
+- **来源 URL：** https://docs.volcengine.com/docs/intelligent-processing/aigc-video-generation-quality-assessment?lang=zh
 - **发布机构 / 作者：** 火山引擎 AI MediaKit
 - **发布日期：** 页面未明确显示
 - **采集日期：** 2026-10-28（Asia/Shanghai）

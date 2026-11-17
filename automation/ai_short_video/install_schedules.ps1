@@ -9,13 +9,31 @@ $runner = Join-Path $repoRoot 'automation\ai_short_video\runner.py'
 if (-not (Test-Path -LiteralPath $python)) { throw "Python not found: $python" }
 if (-not (Test-Path -LiteralPath $runner)) { throw "Runner not found: $runner" }
 
-$logonTrigger = New-ScheduledTaskTrigger -AtLogOn
-$logonTrigger.Delay = 'PT2M'
-
 $definitions = @(
-    @{ Name = 'MaAiAudio-AIVideo-Daily'; Mode = 'daily'; Triggers = @((New-ScheduledTaskTrigger -Daily -At '08:30'), $logonTrigger) },
-    @{ Name = 'MaAiAudio-AIVideo-Release'; Mode = 'release'; Triggers = @((New-ScheduledTaskTrigger -Daily -DaysInterval 3 -At '10:00'), $logonTrigger) },
-    @{ Name = 'MaAiAudio-AIVideo-Audit'; Mode = 'audit'; Triggers = @((New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday -At '11:00')) }
+    @{
+        Name = 'MaAiAudio-AIVideo-Daily'
+        Mode = 'daily'
+        Triggers = @(
+            (New-ScheduledTaskTrigger -Daily -At '08:30'),
+            (New-ScheduledTaskTrigger -Daily -At '13:30'),
+            (New-ScheduledTaskTrigger -Daily -At '19:30')
+        )
+    },
+    @{
+        Name = 'MaAiAudio-AIVideo-Release'
+        Mode = 'release'
+        Triggers = @(
+            (New-ScheduledTaskTrigger -Daily -DaysInterval 3 -At '10:00'),
+            (New-ScheduledTaskTrigger -Daily -DaysInterval 3 -At '15:00')
+        )
+    },
+    @{
+        Name = 'MaAiAudio-AIVideo-Audit'
+        Mode = 'audit'
+        Triggers = @(
+            (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday -At '11:00')
+        )
+    }
 )
 
 foreach ($definition in $definitions) {

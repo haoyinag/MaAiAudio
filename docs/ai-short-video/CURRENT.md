@@ -41,10 +41,11 @@
 
 ## 最近正式发版
 
-最近一次三日发版仍是 **v2026.09.13**（覆盖当时 `v0/inbox` 2026-09-10～09-13）。2026-11-14 为最新日 inbox，**不是**新的正式版本。
+最近一次三日发版是 **v2026.11.14**，覆盖 2026-11-09、11-10、11-11 三个已合入 inbox 日。**最新日摘要仍是 2026-11-11**；它是每日最新可读入口，本版则是最近正式快照，两者不要混用。
 
-- 版摘要：[v2026.09.13/CHANGELOG.md](./v2026.09.13/CHANGELOG.md)
-- 版本说明：[v2026.09.13/README.md](./v2026.09.13/README.md)
+- 版摘要：[v2026.11.14/CHANGELOG.md](./v2026.11.14/CHANGELOG.md)
+- 版本说明：[v2026.11.14/README.md](./v2026.11.14/README.md)
+- 六维精选：[v2026.11.14/dimensions/README.md](./v2026.11.14/dimensions/README.md)
 
 ## 路径约定
 
@@ -58,7 +59,7 @@
 | Wiki 入口说明 | `docs/ai-short-video/WIKI.md` | Wiki 首页应链到本知识库 |
 | 每日 inbox | `docs/ai-short-video/inbox/` | 2026-09-17 起的扫描草稿；最新为 2026-11-14 |
 | 日摘要 | `docs/ai-short-video/inbox/YYYY-MM-DD/DIGEST.md` | 当日总览；原子稿仅溯源 |
-| 最近正式快照 | `docs/ai-short-video/v2026.11.14/` | 最新三日发版产物（基线大版为 `v2026.09.13/`） |
+| 最近正式快照 | `docs/ai-short-video/v2026.11.14/` | 三日发版产物；与最新日 inbox 分开导航 |
 | 历史扫描草稿 | `docs/ai-short-video/v0/inbox/` | 2026-09-10～09-13 积累；不删除 |
 
 六个维度目录名固定为：`general`、`platforms`、`types`、`pipeline`、`growth`、`compliance`。引用条目时使用仓库相对路径，不在正文写本机绝对路径。

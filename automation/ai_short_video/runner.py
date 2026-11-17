@@ -159,6 +159,15 @@ def select_branch(mode: str, date_text: str) -> str:
     return branch
 
 
+def sync_local_master() -> None:
+    try:
+        current = git_output(["rev-parse", "--abbrev-ref", "HEAD"], cwd=ROOT)
+        if current == "master" and not git_output(["status", "--porcelain"], cwd=ROOT):
+            git_output(["merge", "--ff-only", "origin/master"], cwd=ROOT)
+    except CommandError:
+        pass
+
+
 def prepare_worktree(mode: str, date_text: str) -> tuple[str, Path]:
     branch = select_branch(mode, date_text)
     worktree = WORKTREES_DIR / f"{mode}-{date_text}"
@@ -167,6 +176,7 @@ def prepare_worktree(mode: str, date_text: str) -> tuple[str, Path]:
             raise CommandError(f"Stale worktree has uncommitted changes; inspect it before retrying: {worktree}")
         git_output(["worktree", "remove", "--force", str(worktree)])
     git_output(["fetch", "origin", "master"])
+    sync_local_master()
     start = f"origin/{branch}" if branch_exists_remote(branch) else "origin/master"
     git_output(["worktree", "add", "-B", branch, str(worktree), start])
     return branch, worktree
@@ -181,7 +191,13 @@ def stage_policy(worktree: Path) -> None:
 def copy_daily_candidates(worktree: Path, state: dict) -> None:
     since_text = state.get("daily", {}).get("completed_at")
     since = datetime.fromisoformat(since_text) if since_text else None
-    candidates, errors = collector.collect(collector.load_config(collector.DEFAULT_CONFIG), collector.STATE_DB, collector.CANDIDATES_FILE, since)
+    candidates, errors = collector.collect(
+        collector.load_config(collector.DEFAULT_CONFIG),
+        collector.STATE_DB,
+        collector.CANDIDATES_FILE,
+        since,
+        mark_seen=False,
+    )
     if not candidates and errors:
         raise CommandError("All discovery feeds failed; refusing to create an empty daily run")
     target = worktree / ".automation" / "ai-short-video" / "candidates.json"
@@ -195,7 +211,17 @@ def run_codex(mode: str, worktree: Path) -> None:
     log_path = log_dir / f"{mode}-{datetime.now().strftime('%Y%m%d-%H%M%S')}.log"
     try:
         result = subprocess.run(
-            [executable("codex.cmd"), "exec", "--sandbox", "workspace-write", "--cd", str(worktree), "-"],
+            [
+                executable("codex.cmd"),
+                "exec",
+                "-c",
+                "mcp_servers={}",
+                "--sandbox",
+                "workspace-write",
+                "--cd",
+                str(worktree),
+                "-",
+            ],
             input=prompt,
             text=True,
             encoding="utf-8",
@@ -272,6 +298,8 @@ def main(argv: list[str] | None = None) -> int:
                 copy_daily_candidates(worktree, state)
             run_codex(args.mode, worktree)
             pr_url = publish(args.mode, date_text, branch, worktree)
+            if args.mode == "daily":
+                collector.mark_candidates_seen(collector.STATE_DB, collector.CANDIDATES_FILE)
             state[args.mode] = {"completed_at": now.isoformat(), "branch": branch, "pr_url": pr_url}
             save_run_state(state)
             print(pr_url or "No verified changes; no PR created.")

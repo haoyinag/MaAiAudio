@@ -271,10 +271,30 @@ def publish(mode: str, date_text: str, branch: str, worktree: Path) -> str | Non
     sync_local_master()
     return commit_sha
 
+def is_due(mode: str, date_text: str, docs_root: Path) -> bool:
+    if mode == "daily":
+        return not (docs_root / "inbox" / date_text / "DIGEST.md").exists()
+    if mode == "release":
+        run_date = datetime.strptime(date_text, "%Y-%m-%d").date()
+        versions = []
+        for path in docs_root.iterdir():
+            if path.is_dir() and path.name.startswith("v") and path.name != "v0":
+                try:
+                    versions.append(datetime.strptime(path.name[1:], "%Y.%m.%d").date())
+                except ValueError:
+                    continue
+        versions.sort()
+        return not versions or (run_date - versions[-1]).days >= 3
+    if mode == "audit":
+        return not (docs_root / "audits" / f"{date_text}.md").exists()
+    return True
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run isolated AI short-video research and push validated changes to master.")
     parser.add_argument("mode", choices=("daily", "release", "audit"))
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--force", action="store_true")
     args = parser.parse_args(argv)
     now = datetime.now(timezone(timedelta(hours=8), name="Asia/Shanghai"))
     date_text = now.strftime("%Y-%m-%d")
@@ -289,6 +309,9 @@ def main(argv: list[str] | None = None) -> int:
         branch: str | None = None
         try:
             branch, worktree = prepare_worktree(args.mode, date_text)
+            if not args.force and not is_due(args.mode, date_text, worktree / "docs" / "ai-short-video"):
+                print(f"{args.mode} for {date_text} is already satisfied on master; skipping.")
+                return 0
             stage_policy(worktree)
             if args.mode == "daily":
                 copy_daily_candidates(worktree, state)

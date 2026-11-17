@@ -9,10 +9,13 @@ $runner = Join-Path $repoRoot 'automation\ai_short_video\runner.py'
 if (-not (Test-Path -LiteralPath $python)) { throw "Python not found: $python" }
 if (-not (Test-Path -LiteralPath $runner)) { throw "Runner not found: $runner" }
 
+$logonTrigger = New-ScheduledTaskTrigger -AtLogOn
+$logonTrigger.Delay = 'PT2M'
+
 $definitions = @(
-    @{ Name = 'MaAiAudio-AIVideo-Daily'; Mode = 'daily'; Trigger = New-ScheduledTaskTrigger -Daily -At '08:30' },
-    @{ Name = 'MaAiAudio-AIVideo-Release'; Mode = 'release'; Trigger = New-ScheduledTaskTrigger -Daily -DaysInterval 3 -At '10:00' },
-    @{ Name = 'MaAiAudio-AIVideo-Audit'; Mode = 'audit'; Trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday -At '11:00' }
+    @{ Name = 'MaAiAudio-AIVideo-Daily'; Mode = 'daily'; Triggers = @((New-ScheduledTaskTrigger -Daily -At '08:30'), $logonTrigger) },
+    @{ Name = 'MaAiAudio-AIVideo-Release'; Mode = 'release'; Triggers = @((New-ScheduledTaskTrigger -Daily -DaysInterval 3 -At '10:00'), $logonTrigger) },
+    @{ Name = 'MaAiAudio-AIVideo-Audit'; Mode = 'audit'; Triggers = @((New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday -At '11:00')) }
 )
 
 foreach ($definition in $definitions) {
@@ -21,8 +24,8 @@ foreach ($definition in $definitions) {
         continue
     }
     $action = New-ScheduledTaskAction -Execute $python -Argument "`"$runner`" $($definition.Mode)" -WorkingDirectory $repoRoot
-    $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Hours 4)
-    Register-ScheduledTask -TaskName $definition.Name -Action $action -Trigger $definition.Trigger -Settings $settings -Description 'AI short-video research; validates in isolated worktree and pushes directly to master.' -Force | Out-Null
+    $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Hours 4)
+    Register-ScheduledTask -TaskName $definition.Name -Action $action -Trigger $definition.Triggers -Settings $settings -Description 'AI short-video research; validates in isolated worktree and pushes directly to master.' -Force | Out-Null
 }
 
 if ($Uninstall) {

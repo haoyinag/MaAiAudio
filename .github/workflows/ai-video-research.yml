@@ -1,6 +1,10 @@
 name: AI short-video research
 
 on:
+  schedule:
+    - cron: "17 4 * * *"
+    - cron: "43 6 * * *"
+    - cron: "47 7 * * 1"
   workflow_dispatch:
     inputs:
       mode:

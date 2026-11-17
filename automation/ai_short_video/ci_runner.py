@@ -110,11 +110,11 @@ def validate(mode: str, run_date: date) -> list[str]:
 
 def emit_plan(mode: str, run_date: date, force: bool) -> dict[str, str]:
     if mode == "daily":
-        due = not (DOCS_ROOT / "inbox" / run_date.isoformat()).exists()
+        due = not (DOCS_ROOT / "inbox" / run_date.isoformat() / "DIGEST.md").exists()
     elif mode == "release":
         due = release_due(run_date)
     else:
-        due = True
+        due = not (DOCS_ROOT / "audits" / f"{run_date.isoformat()}.md").exists()
     should_run = force or due
     return {
         "mode": mode,

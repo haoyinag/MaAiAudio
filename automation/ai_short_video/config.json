@@ -8,29 +8,77 @@
   "request_timeout_seconds": 20,
   "queries": {
     "domestic": {
-      "general": ["AI视频 通用技巧 提示词 一致性", "AI视频 创作方法 角色一致性"],
-      "platforms": ["AI视频 抖音 红果 快手 小红书 B站 规则 运营", "AI短剧 平台 推荐 审核"],
-      "types": ["AI短剧 漫剧 口播 解说 类型打法", "AI视频 竖屏短剧 无脸内容"],
-      "pipeline": ["AI视频 制作流程 分镜 剪辑", "可灵 即梦 Seedance 视频 更新"],
-      "growth": ["AI短剧 增长 变现 投流 留存 完播", "AI视频 账号运营 商业化"],
-      "compliance": ["生成式人工智能 视频 合规 标识 备案", "AI视频 版权 肖像 声音 平台审核"]
+      "general": [
+        "AI视频 通用技巧 提示词 一致性",
+        "AI视频 创作方法 角色一致性",
+        "AI视频 崩坏 抽卡 废片率 踩坑 边界"
+      ],
+      "platforms": [
+        "AI视频 抖音 红果 快手 小红书 B站 规则 运营",
+        "AI短剧 平台 推荐 审核",
+        "AI短视频 限流 拒审 下架 判罚 规则边界"
+      ],
+      "types": [
+        "AI短剧 漫剧 口播 解说 类型打法",
+        "AI视频 竖屏短剧 无脸内容",
+        "AI短剧 同质化 弃剧 完播率低 踩坑"
+      ],
+      "pipeline": [
+        "AI视频 制作流程 分镜 剪辑",
+        "可灵 即梦 Seedance 视频 更新",
+        "AI视频 制作成本 算账 积分消耗 返工 瓶颈"
+      ],
+      "growth": [
+        "AI短剧 增长 变现 投流 留存 完播",
+        "AI视频 账号运营 商业化",
+        "AI短剧 亏损 投流ROI 变现困境 失败复盘"
+      ],
+      "compliance": [
+        "生成式人工智能 视频 合规 标识 备案",
+        "AI视频 版权 肖像 声音 平台审核",
+        "AI视频 侵权 判例 违规 封号 风险边界"
+      ]
     },
     "overseas": {
-      "general": ["AI video prompting consistency techniques", "AI video storytelling best practices"],
-      "platforms": ["TikTok YouTube Shorts Instagram AI video policy creator tips", "AI video platform recommendation policy"],
-      "types": ["AI micro drama faceless vertical series techniques", "AI video format genre storytelling"],
-      "pipeline": ["AI video production workflow storyboard editing", "AI video model release production workflow"],
-      "growth": ["AI short video growth monetization retention", "AI micro drama audience revenue strategy"],
-      "compliance": ["synthetic media disclosure copyright policy", "AI video likeness voice safety regulation"]
+      "general": [
+        "AI video prompting consistency techniques",
+        "AI video storytelling best practices",
+        "AI video generation artifacts failure modes limitations"
+      ],
+      "platforms": [
+        "TikTok YouTube Shorts Instagram AI video policy creator tips",
+        "AI video platform recommendation policy",
+        "YouTube Shorts TikTok AI slop demonetization suppression pitfalls"
+      ],
+      "types": [
+        "AI micro drama faceless vertical series techniques",
+        "AI video format genre storytelling",
+        "AI short drama audience retention drop-off pitfalls"
+      ],
+      "pipeline": [
+        "AI video production workflow storyboard editing",
+        "AI video model release production workflow",
+        "AI video production cost credits burn rate bottleneck"
+      ],
+      "growth": [
+        "AI short video growth monetization retention",
+        "AI micro drama audience revenue strategy",
+        "AI video creator economics ROI failure breakdown"
+      ],
+      "compliance": [
+        "synthetic media disclosure copyright policy",
+        "AI video likeness voice safety regulation",
+        "AI video copyright takedown likeness claim enforcement"
+      ]
     }
   },
   "dimensions": {
-    "general": ["技巧", "方法", "提示词", "一致性", "workflow", "prompt", "consistency"],
-    "platforms": ["平台", "抖音", "红果", "快手", "小红书", "B站", "TikTok", "YouTube", "Shorts", "Instagram"],
-    "types": ["短剧", "漫剧", "口播", "剧情", "解说", "micro drama", "faceless", "vertical series"],
-    "pipeline": ["制作", "分镜", "生成", "剪辑", "发布", "模型", "storyboard", "editing", "pipeline", "generation"],
-    "growth": ["增长", "变现", "投流", "留存", "完播", "收入", "growth", "monetization", "retention", "revenue"],
-    "compliance": ["合规", "版权", "肖像", "标识", "备案", "审核", "policy", "copyright", "disclosure", "safety"]
+    "general": ["技巧", "方法", "提示词", "一致性", "崩坏", "废片", "踩坑", "workflow", "prompt", "consistency", "artifact", "limitation"],
+    "platforms": ["平台", "抖音", "红果", "快手", "小红书", "B站", "限流", "拒审", "TikTok", "YouTube", "Shorts", "Instagram", "demonetization"],
+    "types": ["短剧", "漫剧", "口播", "剧情", "解说", "同质化", "micro drama", "faceless", "vertical series"],
+    "pipeline": ["制作", "分镜", "生成", "剪辑", "发布", "模型", "成本", "积分", "返工", "storyboard", "editing", "pipeline", "generation", "cost"],
+    "growth": ["增长", "变现", "投流", "留存", "完播", "收入", "亏损", "困境", "ROI", "growth", "monetization", "retention", "revenue"],
+    "compliance": ["合规", "版权", "肖像", "标识", "备案", "审核", "侵权", "违规", "policy", "copyright", "disclosure", "safety"]
   },
   "preferred_domains": [
     "gov.cn",

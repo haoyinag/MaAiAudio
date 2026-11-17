@@ -3,7 +3,7 @@
 - **主维度：** `platforms`（平台技巧）
 - **来源 URL：** https://ads.tiktok.com/resources/help/article/how-to-publish-your-mini-drama-content?lang=en-GB
 - **发布机构 / 作者：** TikTok for Business
-- **发布日期：** 2026-09（页面最后更新）
+- **发布日期：** 2026-11（页面最后更新）
 - **采集日期：** 2026-11-11（Asia/Shanghai）
 - **来源等级：** 平台官方帮助文档
 - **核验状态：** `单一来源`

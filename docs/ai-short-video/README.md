@@ -6,9 +6,10 @@
 
 ## 怎么读
 
-1. 打开 [CURRENT.md](./CURRENT.md) 看最新可读
-2. 读最新 [日摘要](./inbox/2026-11-11/DIGEST.md)；需要已发布快照时再读 [版摘要 CHANGELOG](./v2026.09.13/CHANGELOG.md)
-3. 需要细节再下钻原子稿；inbox INDEX 与日目录仅溯源
+1. **做视频实操前先读**：[当下全局最佳实践手册 PLAYBOOK.md](./PLAYBOOK.md)（整合端到端工作流、主流模型路由、四大赛道作战卡、核心困境避坑与变现分账）
+2. **看每日最新情报与当前指针**：打开 [CURRENT.md](./CURRENT.md) 或直接读最新 [日摘要（2026-11-16）](./inbox/2026-11-16/DIGEST.md)
+3. **看阶段发版快照**：读 [最新版摘要 v2026.11.14/CHANGELOG.md](./v2026.11.14/CHANGELOG.md) 及 [基线大版 v2026.09.13/CHANGELOG.md](./v2026.09.13/CHANGELOG.md)
+4. **查原始证据与参数细节**：按链接下钻原子稿；inbox INDEX 与日目录仅溯源
 
 ## 知识维度
 
@@ -25,8 +26,8 @@
 
 ## 版本节奏
 
-- **每日巡扫**：先写六维 `SCAN.md` 账本，再把通过分层核验的线索写成 inbox 原子稿与 `DIGEST.md`，先入库、后定稿。
-- **约每 3 天发一版**：将已核验条目并入 `vN/`，并更新 [CURRENT.md](./CURRENT.md) 指向最新版本。
+- **每日巡扫**：先写六维 `SCAN.md` 账本（含正向技巧、工作流、行业困境与变现），再把通过分层核验的线索写成 inbox 原子稿与 `DIGEST.md`，先入库、后定稿。
+- **约每 3 天发一版**：将已核验条目并入 `vN/`，同步滚动更新 [PLAYBOOK.md](./PLAYBOOK.md) 与 [CURRENT.md](./CURRENT.md)。
 - 旧版本目录保留，便于对照与回滚阅读，不原地改写已发布条目的事实结论。
 
 ## 来源与写作约束
@@ -38,9 +39,10 @@
 
 ## 快速导航
 
+- 当下全局最佳实践手册：[PLAYBOOK.md](./PLAYBOOK.md)
 - 当前版本指针：[CURRENT.md](./CURRENT.md)
-- 最新版摘要：[v2026.09.13/CHANGELOG.md](./v2026.09.13/CHANGELOG.md)
-- 最新日摘要：[inbox/2026-11-11/DIGEST.md](./inbox/2026-11-11/DIGEST.md)
+- 最新版摘要：[v2026.11.14/CHANGELOG.md](./v2026.11.14/CHANGELOG.md)（基线大版：[v2026.09.13/CHANGELOG.md](./v2026.09.13/CHANGELOG.md)）
+- 最新日摘要：[inbox/2026-11-16/DIGEST.md](./inbox/2026-11-16/DIGEST.md)
 - 扫描草稿暂存：[inbox/README.md](./inbox/README.md)
 - v0 脚手架（历史）：[v0/README.md](./v0/README.md)
 - Wiki 入口约定：[WIKI.md](./WIKI.md)

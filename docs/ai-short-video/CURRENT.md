@@ -11,25 +11,40 @@
 
 默认阅读路径：**PLAYBOOK（全局最佳实践） → CURRENT → 日 DIGEST**。原子稿仅作溯源，不必逐篇打开。
 
-- 最新日摘要：[inbox/2026-11-18/DIGEST.md](./inbox/2026-11-18/DIGEST.md)
+- 最新日摘要：[inbox/2026-11-19/DIGEST.md](./inbox/2026-11-19/DIGEST.md)
 - 最近周审计：[audits/2026-11-16.md](./audits/2026-11-16.md)
 
 ### 一句话结论
 
-预检通过不等于已获授权：红果承认融脸与修改原始肖像可能使部分前置拦截失效；成功生成也不等于可交付，Runway 对完成但不可用的成片不自动退积分；Seedance 含输入视频任务还存在最低 token 计费地板。制作侧应同时建立授权 / 投诉闭环、三态废片账本和实际用量对账。
+今天把六类“看似成功”拆成可审计门禁：接口最大参考量不等于稳定区，单条过审不等于账号原创，短时长不等于微短剧成立，资源包低价不等于没有到期与超额风险，总播放不等于合格收益，成片合规也不等于推广与复播链路已经合规。
 
 ### 当日原子稿（溯源）
 
+#### general
+
+- [先把参考素材压到稳定区再扩容](./inbox/2026-11-19/general-seedance-reference-load-boundaries.md)
+
 #### platforms
 
-- [红果肖像预检仍需投诉闭环](./inbox/2026-11-18/platforms-hongguo-portrait-precheck-complaint-loop.md)
+- [Facebook 原创性按持续行为处罚而非只看单条](./inbox/2026-11-19/platforms-facebook-originality-enforcement.md)
+
+#### types
+
+- [微短剧按项目级主线与完整情节验收](./inbox/2026-11-19/types-microdrama-project-acceptance-boundary.md)
 
 #### pipeline
 
-- [Runway 成片不满意仍消耗积分](./inbox/2026-11-18/pipeline-runway-completed-rejected-credit-cost.md)
-- [Seedance 含输入视频按最低用量算账](./inbox/2026-11-18/pipeline-seedance-input-video-minimum-billing.md)
+- [Seedance 资源包同时设到期与超额门禁](./inbox/2026-11-19/pipeline-seedance-resource-pack-expiry-overage.md)
 
-`general`、`types`、`growth`、`compliance` 今日无晋升，原因见摘要与账本。扫描账本：[inbox/2026-11-18/SCAN.md](./inbox/2026-11-18/SCAN.md) · 日目录：[inbox/2026-11-18/README.md](./inbox/2026-11-18/README.md) · inbox 指针：[inbox/README.md](./inbox/README.md)
+#### growth
+
+- [Facebook 用合格观看而非总播放核算收益](./inbox/2026-11-19/growth-facebook-qualified-view-ledger.md)
+
+#### compliance
+
+- [微短剧内容方与推广方都进入常态巡查](./inbox/2026-11-19/compliance-microdrama-provider-promoter-audit.md)
+
+扫描账本：[inbox/2026-11-19/SCAN.md](./inbox/2026-11-19/SCAN.md) · 日目录：[inbox/2026-11-19/README.md](./inbox/2026-11-19/README.md) · inbox 指针：[inbox/README.md](./inbox/README.md)
 
 ## 最近正式发版
 
@@ -46,7 +61,7 @@
 | 知识库总述 | `docs/ai-short-video/README.md` | 用途、维度、节奏、来源约束 |
 | 当前阅读层 | `docs/ai-short-video/CURRENT.md` | 本文件；PLAYBOOK 置顶 + 日 DIGEST + 结论 + 当日原子链接 |
 | Wiki 入口说明 | `docs/ai-short-video/WIKI.md` | Wiki 首页应链到本知识库 |
-| 每日 inbox | `docs/ai-short-video/inbox/` | 2026-09-17 起的扫描草稿；最新为 2026-11-18 |
+| 每日 inbox | `docs/ai-short-video/inbox/` | 2026-09-17 起的扫描草稿；最新为 2026-11-19 |
 | 日摘要 | `docs/ai-short-video/inbox/YYYY-MM-DD/DIGEST.md` | 当日总览；原子稿仅溯源 |
 | 最近正式快照 | `docs/ai-short-video/v2026.11.14/` | 最新三日发版产物（基线大版为 `v2026.09.13/`） |
 | 历史扫描草稿 | `docs/ai-short-video/v0/inbox/` | 2026-09-10～09-13 积累；不删除 |

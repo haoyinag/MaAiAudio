@@ -12,7 +12,7 @@
 默认阅读路径：**PLAYBOOK（全局最佳实践） → CURRENT → 日 DIGEST**。原子稿仅作溯源，不必逐篇打开。
 
 - 最新日摘要：[inbox/2026-11-20/DIGEST.md](./inbox/2026-11-20/DIGEST.md)
-- 最近周审计：[audits/2026-11-16.md](./audits/2026-11-16.md)
+- 最近周审计：[audits/2026-11-23.md](./audits/2026-11-23.md)
 
 ### 一句话结论
 

@@ -11,43 +11,40 @@
 
 默认阅读路径：**PLAYBOOK（全局最佳实践） → CURRENT → 日 DIGEST**。原子稿仅作溯源，不必逐篇打开。
 
-- 最新日摘要：[inbox/2026-11-20/DIGEST.md](./inbox/2026-11-20/DIGEST.md)
+- 最新日摘要：[inbox/2026-11-23/DIGEST.md](./inbox/2026-11-23/DIGEST.md)
 - 最近周审计：[audits/2026-11-23.md](./audits/2026-11-23.md)
 
 ### 一句话结论
 
-今天把五类隐性返工前置为门禁：高频动作与强情绪词先做模型故障预检，参考视频成本同时计算输入与成功输出，故事板生成首帧前冻结画幅与分辨率，AI 虚拟人广告逐句挂接真实证据且不能靠 AI 标识补救虚构体验。
+今天把生成到变现收紧为六道门禁：错误先分流、平台验原创叙事、类型验故事辨识度、自动时长按净积分结算、ROI 使用全成本、委托制作仍审核肖像与声音授权。
 
 ### 当日原子稿（溯源）
 
 #### general
 
-- [万相 3.0 把高频动作改写为可观察状态变化](./inbox/2026-11-20/general-wan3-high-frequency-motion-boundary.md)
-- [Seedance 2.5 强情绪词先过眼部异常预检](./inbox/2026-11-20/general-seedance-emotion-eye-artifact.md)
+- [先按错误状态分流再改提示或换模型](./inbox/2026-11-23/general-runway-error-state-triage.md)
 
 #### platforms
 
-- 今日无新增 atom；重复与待核验原因见当日扫描账本。
+- [YouTube 用原创叙事验收 AI 内容而非只看工具](./inbox/2026-11-23/platforms-youtube-ai-originality-story-gate.md)
 
 #### types
 
-- 今日无新增 atom；缺少类型化失败量表与落选复盘。
+- [微短剧先验收故事辨识度再决定真人或 AI 形态](./inbox/2026-11-23/types-microdrama-story-distinctiveness-gate.md)
 
 #### pipeline
 
-- [万相参考视频按输入与成功输出总秒数算账](./inbox/2026-11-20/pipeline-wan3-input-output-billing-boundary.md)
-- [Firefly 故事板生成首帧前冻结画幅与分辨率](./inbox/2026-11-20/pipeline-firefly-story-project-settings-lock.md)
+- [Runway 自动时长任务按预占减退款核最终成本](./inbox/2026-11-23/pipeline-runway-reserved-final-credit-reconciliation.md)
 
 #### growth
 
-- 今日无新增 atom；通用 CPM / ROI 仍缺一手全成本证据。
+- [AI 短剧 ROI 不得把算力成本当项目总成本](./inbox/2026-11-23/growth-ai-drama-full-cost-roi-denominator.md)
 
 #### compliance
 
-- [AI 虚拟人广告不得虚构体验且标识不能补救失实](./inbox/2026-11-20/compliance-ai-virtual-person-ad-claims.md)
+- [委托 AI 带货视频仍要审核肖像与声音授权](./inbox/2026-11-23/compliance-commissioner-likeness-voice-audit-duty.md)
 
-扫描账本：[inbox/2026-11-20/SCAN.md](./inbox/2026-11-20/SCAN.md) · 日目录：[inbox/2026-11-20/README.md](./inbox/2026-11-20/README.md) · inbox 指针：[inbox/README.md](./inbox/README.md)
-
+扫描账本：[inbox/2026-11-23/SCAN.md](./inbox/2026-11-23/SCAN.md) · 日目录：[inbox/2026-11-23/README.md](./inbox/2026-11-23/README.md) · inbox 指针：[inbox/README.md](./inbox/README.md)
 ## 最近正式发版（稳定快照，不等于每日最新）
 
 - 最新三日发版：**[v2026.11.20](./v2026.11.20/README.md)**（版摘要见 [v2026.11.20/CHANGELOG.md](./v2026.11.20/CHANGELOG.md)，六维精选见 [v2026.11.20/dimensions/](./v2026.11.20/dimensions/README.md)）
@@ -64,7 +61,7 @@
 | 知识库总述 | `docs/ai-short-video/README.md` | 用途、维度、节奏、来源约束 |
 | 当前阅读层 | `docs/ai-short-video/CURRENT.md` | 本文件；PLAYBOOK 置顶 + 日 DIGEST + 结论 + 当日原子链接 |
 | Wiki 入口说明 | `docs/ai-short-video/WIKI.md` | Wiki 首页应链到本知识库 |
-| 每日 inbox | `docs/ai-short-video/inbox/` | 2026-09-17 起的扫描草稿；最新为 2026-11-20 |
+| 每日 inbox | `docs/ai-short-video/inbox/` | 2026-09-17 起的扫描草稿；最新为 2026-11-23 |
 | 日摘要 | `docs/ai-short-video/inbox/YYYY-MM-DD/DIGEST.md` | 当日总览；原子稿仅溯源 |
 | 最近正式快照 | `docs/ai-short-video/v2026.11.20/` | 最近完成复核的稳定发版；不替代每日 DIGEST（基线大版为 `v2026.09.13/`） |
 | 历史扫描草稿 | `docs/ai-short-video/v0/inbox/` | 2026-09-10～09-13 积累；不删除 |

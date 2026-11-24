@@ -11,40 +11,40 @@
 
 默认阅读路径：**PLAYBOOK（全局最佳实践） → CURRENT → 日 DIGEST**。原子稿仅作溯源，不必逐篇打开。
 
-- 最新日摘要：[inbox/2026-11-23/DIGEST.md](./inbox/2026-11-23/DIGEST.md)
+- 最新日摘要：[inbox/2026-11-24/DIGEST.md](./inbox/2026-11-24/DIGEST.md)
 - 最近周审计：[audits/2026-11-23.md](./audits/2026-11-23.md)
 
 ### 一句话结论
 
-今天把生成到变现收紧为六道门禁：错误先分流、平台验原创叙事、类型验故事辨识度、自动时长按净积分结算、ROI 使用全成本、委托制作仍审核肖像与声音授权。
+今天把生成到维权收紧为六道门禁：控镜先查互斥、平台验整套发布包、连载验持续完结、必用素材绑定分镜、激励计入三门槛/回撤/独家成本、版权投诉预备批量证据。
 
 ### 当日原子稿（溯源）
 
 #### general
 
-- [先按错误状态分流再改提示或换模型](./inbox/2026-11-23/general-runway-error-state-triage.md)
+- [生成前先选兼容的控镜家族](./inbox/2026-11-24/general-firefly-control-family-preflight.md)
 
 #### platforms
 
-- [YouTube 用原创叙事验收 AI 内容而非只看工具](./inbox/2026-11-23/platforms-youtube-ai-originality-story-gate.md)
+- [微短剧发布前验收正片与宣推全包](./inbox/2026-11-24/platforms-microdrama-whole-package-preflight.md)
 
 #### types
 
-- [微短剧先验收故事辨识度再决定真人或 AI 形态](./inbox/2026-11-23/types-microdrama-story-distinctiveness-gate.md)
+- [B站 AI 连载先按完整性与持续更新门禁立项](./inbox/2026-11-24/types-bilibili-ai-series-format-gate.md)
 
 #### pipeline
 
-- [Runway 自动时长任务按预占减退款核最终成本](./inbox/2026-11-23/pipeline-runway-reserved-final-credit-reconciliation.md)
+- [Kickart 分镜先锁素材再把预扣与净扣分账](./inbox/2026-11-24/pipeline-kickart-asset-and-credit-gates.md)
 
 #### growth
 
-- [AI 短剧 ROI 不得把算力成本当项目总成本](./inbox/2026-11-23/growth-ai-drama-full-cost-roi-denominator.md)
+- [B站 AI 影视激励按三门槛、回撤与独家成本算账](./inbox/2026-11-24/growth-bilibili-three-gate-incentive-ledger.md)
 
 #### compliance
 
-- [委托 AI 带货视频仍要审核肖像与声音授权](./inbox/2026-11-23/compliance-commissioner-likeness-voice-audit-duty.md)
+- [微短剧版权投诉先备齐可批量核验的通知包](./inbox/2026-11-24/compliance-microdrama-copyright-notice-package.md)
 
-扫描账本：[inbox/2026-11-23/SCAN.md](./inbox/2026-11-23/SCAN.md) · 日目录：[inbox/2026-11-23/README.md](./inbox/2026-11-23/README.md) · inbox 指针：[inbox/README.md](./inbox/README.md)
+扫描账本：[inbox/2026-11-24/SCAN.md](./inbox/2026-11-24/SCAN.md) · 日目录：[inbox/2026-11-24/README.md](./inbox/2026-11-24/README.md) · inbox 指针：[inbox/README.md](./inbox/README.md)
 ## 最近正式发版（稳定快照，不等于每日最新）
 
 - 最新三日发版：**[v2026.11.20](./v2026.11.20/README.md)**（版摘要见 [v2026.11.20/CHANGELOG.md](./v2026.11.20/CHANGELOG.md)，六维精选见 [v2026.11.20/dimensions/](./v2026.11.20/dimensions/README.md)）
@@ -61,7 +61,7 @@
 | 知识库总述 | `docs/ai-short-video/README.md` | 用途、维度、节奏、来源约束 |
 | 当前阅读层 | `docs/ai-short-video/CURRENT.md` | 本文件；PLAYBOOK 置顶 + 日 DIGEST + 结论 + 当日原子链接 |
 | Wiki 入口说明 | `docs/ai-short-video/WIKI.md` | Wiki 首页应链到本知识库 |
-| 每日 inbox | `docs/ai-short-video/inbox/` | 2026-09-17 起的扫描草稿；最新为 2026-11-23 |
+| 每日 inbox | `docs/ai-short-video/inbox/` | 2026-09-17 起的扫描草稿；最新为 2026-11-24 |
 | 日摘要 | `docs/ai-short-video/inbox/YYYY-MM-DD/DIGEST.md` | 当日总览；原子稿仅溯源 |
 | 最近正式快照 | `docs/ai-short-video/v2026.11.20/` | 最近完成复核的稳定发版；不替代每日 DIGEST（基线大版为 `v2026.09.13/`） |
 | 历史扫描草稿 | `docs/ai-short-video/v0/inbox/` | 2026-09-10～09-13 积累；不删除 |

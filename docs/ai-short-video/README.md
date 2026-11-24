@@ -7,7 +7,7 @@
 ## 怎么读
 
 1. **做视频实操前先读（持续滚动）**：[当下全局最佳实践手册 PLAYBOOK.md](./PLAYBOOK.md)（整合所有已核验版本的端到端工作流、模型路由、困境边界与变现分账）
-2. **看每日最新情报（可能尚未进入正式版）**：打开 [CURRENT.md](./CURRENT.md) 或直接读最新 [日摘要（2026-11-23）](./inbox/2026-11-23/DIGEST.md)
+2. **看每日最新情报（可能尚未进入正式版）**：打开 [CURRENT.md](./CURRENT.md) 或直接读最新 [日摘要（2026-11-24）](./inbox/2026-11-24/DIGEST.md)
 3. **看最近正式稳定快照**：读 [最新版摘要 v2026.11.20/CHANGELOG.md](./v2026.11.20/CHANGELOG.md) 及 [基线大版 v2026.09.13/CHANGELOG.md](./v2026.09.13/CHANGELOG.md)
 4. **查原始证据与参数细节**：按链接下钻原子稿；inbox INDEX 与日目录仅溯源
 
@@ -42,7 +42,7 @@
 - 当下全局最佳实践手册：[PLAYBOOK.md](./PLAYBOOK.md)
 - 当前版本指针：[CURRENT.md](./CURRENT.md)
 - 最近正式版摘要：[v2026.11.20/CHANGELOG.md](./v2026.11.20/CHANGELOG.md)（上一版：[v2026.11.14/CHANGELOG.md](./v2026.11.14/CHANGELOG.md)；基线大版：[v2026.09.13/CHANGELOG.md](./v2026.09.13/CHANGELOG.md)）
-- 最新日摘要：[inbox/2026-11-23/DIGEST.md](./inbox/2026-11-23/DIGEST.md)
+- 最新日摘要：[inbox/2026-11-24/DIGEST.md](./inbox/2026-11-24/DIGEST.md)
 - 扫描草稿暂存：[inbox/README.md](./inbox/README.md)
 - v0 脚手架（历史）：[v0/README.md](./v0/README.md)
 - Wiki 入口约定：[WIKI.md](./WIKI.md)

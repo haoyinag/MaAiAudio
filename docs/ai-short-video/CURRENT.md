@@ -13,40 +13,24 @@
 
 默认阅读路径：**PLAYBOOK（全局最佳实践） → CURRENT → 日 DIGEST**。原子稿仅作溯源，不必逐篇打开。
 
-- 最新日摘要：[inbox/2026-11-25/DIGEST.md](./inbox/2026-11-25/DIGEST.md)
+- 最新日摘要：[inbox/2026-11-26/DIGEST.md](./inbox/2026-11-26/DIGEST.md)
 - 最近周审计：[audits/2026-11-23.md](./audits/2026-11-23.md)
 
 ### 一句话结论
 
-今天把产品边界写进五道门禁：探索分辨率限积分、连载冻结季集元数据、类型验证信息流原生性、API 防低并发与资源包溢出、内置 AI 产物商用前核授权；会员续集变现仍待核验。
+重复特效验收留出镜头，连载按剧情功能审核造型，转码与音画返工单独验收，投流试验和实际收入分别对账，合规按内容及发行版本核验。
 
 ### 当日原子稿（溯源）
 
-#### general
+- `general`　[重复特效先对照提示词，再验证万相微调](./inbox/2026-11-26/general-wan-finetune-holdout.md)
+- `platforms`　[YouTube Studio 按通知状态分流发布限制](./inbox/2026-11-26/platforms-youtube-studio-notice-triage.md) · [快手小说剧确认转码再提审](./inbox/2026-11-26/platforms-kuaishou-noveldrama-transcode-preflight.md)
+- `types`　[志怪改编先验人物造型能否承载剧情](./inbox/2026-11-26/types-chouhu-character-adaptation.md)
+- `pipeline`　[短剧Lab分镜音色漂移时保留画面重配](./inbox/2026-11-26/pipeline-duanjulab-voice-repair.md) · [Google Flow 在 12 月停用节点前试跑替代模型](./inbox/2026-11-26/pipeline-flow-december-migration.md)
+- `growth`　[TikTok 投放先隔离受众做素材拆分测试](./inbox/2026-11-26/growth-tiktok-paid-creative-split.md) · [TikTok 短剧分开看进剧、支付动作和混合 ROAS](./inbox/2026-11-26/growth-tiktok-microseries-reporting.md)
+- `compliance`　[AI 健康内容核验身份、证据和康复案例](./inbox/2026-11-26/compliance-cn-health-video-claims-and-credentials.md) · [欧盟深度伪造披露按实际发行版本判断](./inbox/2026-11-26/compliance-eu-deepfake-fiction-vs-shopping-disclosure.md)
 
-- [探索稿先按分辨率设积分上限再升清](./inbox/2026-11-25/general-firefly-resolution-credit-preflight.md)
+扫描账本：[SCAN.md](./inbox/2026-11-26/SCAN.md) · 日目录：[README.md](./inbox/2026-11-26/README.md) · [inbox 指针](./inbox/README.md)
 
-#### platforms
-
-- [YouTube Shorts 连载按季集元数据与顺序播放打包](./inbox/2026-11-25/platforms-youtube-shorts-series-package.md)
-
-#### types
-
-- [TikTok 竖屏微系列先验证创作者与信息流原生性](./inbox/2026-11-25/types-tiktok-creator-led-feed-native-series.md)
-
-#### pipeline
-
-- [即梦 API 把成功计费、并发与资源包溢出设成三道门](./inbox/2026-11-25/pipeline-jimeng-concurrency-overage-gate.md)
-
-#### growth
-
-- [待核验｜YouTube 连载会员续集漏斗先验证功能再计收入](./inbox/2026-11-25/growth-youtube-members-only-series-funnel-pending.md)
-
-#### compliance
-
-- [B站内置 AI 产物商用前先核单独授权](./inbox/2026-11-25/compliance-bilibili-ai-function-commercial-boundary.md)
-
-扫描账本：[inbox/2026-11-25/SCAN.md](./inbox/2026-11-25/SCAN.md) · 日目录：[inbox/2026-11-25/README.md](./inbox/2026-11-25/README.md) · inbox 指针：[inbox/README.md](./inbox/README.md)
 ## 最近正式发版（稳定快照，不等于每日最新）
 
 - 最新三日发版：**[v2026.11.20](./v2026.11.20/README.md)**（版摘要见 [v2026.11.20/CHANGELOG.md](./v2026.11.20/CHANGELOG.md)，六维精选见 [v2026.11.20/dimensions/](./v2026.11.20/dimensions/README.md)）
@@ -63,7 +47,7 @@
 | 知识库总述 | `docs/ai-short-video/README.md` | 用途、维度、节奏、来源约束 |
 | 当前阅读层 | `docs/ai-short-video/CURRENT.md` | 本文件；PLAYBOOK 置顶 + 日 DIGEST + 结论 + 当日原子链接 |
 | Wiki 入口说明 | `docs/ai-short-video/WIKI.md` | Wiki 首页应链到本知识库 |
-| 每日 inbox | `docs/ai-short-video/inbox/` | 2026-09-17 起的扫描草稿；最新为 2026-11-25 |
+| 每日 inbox | `docs/ai-short-video/inbox/` | 2026-09-17 起的扫描草稿；最新为 2026-11-26 |
 | 日摘要 | `docs/ai-short-video/inbox/YYYY-MM-DD/DIGEST.md` | 当日总览；原子稿仅溯源 |
 | 最近正式快照 | `docs/ai-short-video/v2026.11.20/` | 最近完成复核的稳定发版；不替代每日 DIGEST（基线大版为 `v2026.09.13/`） |
 | 历史扫描草稿 | `docs/ai-short-video/v0/inbox/` | 2026-09-10～09-13 积累；不删除 |

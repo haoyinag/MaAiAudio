@@ -33,8 +33,9 @@
 
 ## 最近正式发版（稳定快照，不等于每日最新）
 
-- 最新三日发版：**[v2026.11.20](./v2026.11.20/README.md)**（版摘要见 [v2026.11.20/CHANGELOG.md](./v2026.11.20/CHANGELOG.md)，六维精选见 [v2026.11.20/dimensions/](./v2026.11.20/dimensions/README.md)）
-- 上一正式版：**[v2026.11.14](./v2026.11.14/README.md)**（复核记录见 [v2026.11.14/VERIFICATION.md](./v2026.11.14/VERIFICATION.md)）
+- 最新三日正式版本候选：**[v2026.11.26](./v2026.11.26/README.md)**（[变更记录](./v2026.11.26/CHANGELOG.md) · [六维精选](./v2026.11.26/dimensions/README.md)）
+- 最近已发布正式版：**[v2026.11.20](./v2026.11.20/README.md)**（版摘要见 [v2026.11.20/CHANGELOG.md](./v2026.11.20/CHANGELOG.md)，六维精选见 [v2026.11.20/dimensions/](./v2026.11.20/dimensions/README.md)）
+- 较早正式版：**[v2026.11.14](./v2026.11.14/README.md)**（复核记录见 [v2026.11.14/VERIFICATION.md](./v2026.11.14/VERIFICATION.md)）
 - 首个基线正式版：**[v2026.09.13](./v2026.09.13/README.md)**（版摘要见 [v2026.09.13/CHANGELOG.md](./v2026.09.13/CHANGELOG.md)）
 
 ## 路径约定
@@ -49,6 +50,7 @@
 | Wiki 入口说明 | `docs/ai-short-video/WIKI.md` | Wiki 首页应链到本知识库 |
 | 每日 inbox | `docs/ai-short-video/inbox/` | 2026-09-17 起的扫描草稿；最新为 2026-11-26 |
 | 日摘要 | `docs/ai-short-video/inbox/YYYY-MM-DD/DIGEST.md` | 当日总览；原子稿仅溯源 |
+| 最新正式版本候选 | `docs/ai-short-video/v2026.11.26/` | 本轮复核后的固定快照，待 runner 发布 |
 | 最近正式快照 | `docs/ai-short-video/v2026.11.20/` | 最近完成复核的稳定发版；不替代每日 DIGEST（基线大版为 `v2026.09.13/`） |
 | 历史扫描草稿 | `docs/ai-short-video/v0/inbox/` | 2026-09-10～09-13 积累；不删除 |
 

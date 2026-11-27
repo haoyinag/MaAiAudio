@@ -13,23 +13,23 @@
 
 默认阅读路径：**PLAYBOOK（全局最佳实践） → CURRENT → 日 DIGEST**。原子稿仅作溯源，不必逐篇打开。
 
-- 最新日摘要：[inbox/2026-11-26/DIGEST.md](./inbox/2026-11-26/DIGEST.md)
+- 最新日摘要：[inbox/2026-11-27/DIGEST.md](./inbox/2026-11-27/DIGEST.md)
 - 最近周审计：[audits/2026-11-23.md](./audits/2026-11-23.md)
 
 ### 一句话结论
 
-重复特效验收留出镜头，连载按剧情功能审核造型，转码与音画返工单独验收，投流试验和实际收入分别对账，合规按内容及发行版本核验。
+竖屏对白先验无字底片，小程序推广按挂载规则复核，双人对白用共底分人驱动，重制前备份分集成果，流水与回款分开看，漏标按平台通知补正。
 
 ### 当日原子稿（溯源）
 
-- `general`　[重复特效先对照提示词，再验证万相微调](./inbox/2026-11-26/general-wan-finetune-holdout.md)
-- `platforms`　[YouTube Studio 按通知状态分流发布限制](./inbox/2026-11-26/platforms-youtube-studio-notice-triage.md) · [快手小说剧确认转码再提审](./inbox/2026-11-26/platforms-kuaishou-noveldrama-transcode-preflight.md)
-- `types`　[志怪改编先验人物造型能否承载剧情](./inbox/2026-11-26/types-chouhu-character-adaptation.md)
-- `pipeline`　[短剧Lab分镜音色漂移时保留画面重配](./inbox/2026-11-26/pipeline-duanjulab-voice-repair.md) · [Google Flow 在 12 月停用节点前试跑替代模型](./inbox/2026-11-26/pipeline-flow-december-migration.md)
-- `growth`　[TikTok 投放先隔离受众做素材拆分测试](./inbox/2026-11-26/growth-tiktok-paid-creative-split.md) · [TikTok 短剧分开看进剧、支付动作和混合 ROAS](./inbox/2026-11-26/growth-tiktok-microseries-reporting.md)
-- `compliance`　[AI 健康内容核验身份、证据和康复案例](./inbox/2026-11-26/compliance-cn-health-video-claims-and-credentials.md) · [欧盟深度伪造披露按实际发行版本判断](./inbox/2026-11-26/compliance-eu-deepfake-fiction-vs-shopping-disclosure.md)
+- `general`　[Seedance 竖屏对白先验无字底片](./inbox/2026-11-27/general-seedance-clean-caption.md)
+- `platforms`　[抖音小程序推广稿按挂载规则验收](./inbox/2026-11-27/platforms-douyin-anchor-review.md)
+- `types`　[Act-Two 双人同框对白用同一底片分人驱动](./inbox/2026-11-27/types-act-two-dialogue.md) · [循环数字人口播分开验画面与音频接缝](./inbox/2026-11-27/types-avatar-loop-seam.md)
+- `pipeline`　[剧创重制工坊重新分析前先备份分集成果](./inbox/2026-11-27/pipeline-remake-before-reanalysis.md)
+- `growth`　[短剧投流按流水、结算与全成本分别复盘](./inbox/2026-11-27/growth-short-drama-roi-denominators.md)
+- `compliance`　[B 站稿件收到漏标补正时辨认处置阶段](./inbox/2026-11-27/compliance-bilibili-label-return.md)
 
-扫描账本：[SCAN.md](./inbox/2026-11-26/SCAN.md) · 日目录：[README.md](./inbox/2026-11-26/README.md) · [inbox 指针](./inbox/README.md)
+扫描账本：[SCAN.md](./inbox/2026-11-27/SCAN.md) · 日目录：[README.md](./inbox/2026-11-27/README.md) · [inbox 指针](./inbox/README.md)
 
 ## 最近正式发版（稳定快照，不等于每日最新）
 
@@ -48,7 +48,7 @@
 | 知识库总述 | `docs/ai-short-video/README.md` | 用途、维度、节奏、来源约束 |
 | 当前阅读层 | `docs/ai-short-video/CURRENT.md` | 本文件；PLAYBOOK 置顶 + 日 DIGEST + 结论 + 当日原子链接 |
 | Wiki 入口说明 | `docs/ai-short-video/WIKI.md` | Wiki 首页应链到本知识库 |
-| 每日 inbox | `docs/ai-short-video/inbox/` | 2026-09-17 起的扫描草稿；最新为 2026-11-26 |
+| 每日 inbox | `docs/ai-short-video/inbox/` | 2026-09-17 起的扫描草稿；最新为 2026-11-27 |
 | 日摘要 | `docs/ai-short-video/inbox/YYYY-MM-DD/DIGEST.md` | 当日总览；原子稿仅溯源 |
 | 最新正式版本候选 | `docs/ai-short-video/v2026.11.26/` | 本轮复核后的固定快照，待 runner 发布 |
 | 最近正式快照 | `docs/ai-short-video/v2026.11.20/` | 最近完成复核的稳定发版；不替代每日 DIGEST（基线大版为 `v2026.09.13/`） |

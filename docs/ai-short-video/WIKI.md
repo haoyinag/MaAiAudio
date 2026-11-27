@@ -10,7 +10,7 @@ Wiki 首页（`Home`）默认应链到 **PLAYBOOK + CURRENT + 最新 CHANGELOG +
 - 当前阅读指针：`docs/ai-short-video/CURRENT.md`
 - 最新正式版本候选：`docs/ai-short-video/v2026.11.26/CHANGELOG.md`
 - 最近已发布正式版摘要（稳定快照）：`docs/ai-short-video/v2026.11.20/CHANGELOG.md`（上一版：`docs/ai-short-video/v2026.11.14/CHANGELOG.md`；基线大版：`docs/ai-short-video/v2026.09.13/CHANGELOG.md`）
-- 最新日摘要（每日最新可读）：`docs/ai-short-video/inbox/2026-11-26/DIGEST.md`
+- 最新日摘要（每日最新可读）：`docs/ai-short-video/inbox/2026-11-27/DIGEST.md`
 - 知识库总述：`docs/ai-short-video/README.md`
 
 建议首页只放导航，不另写一份会漂移的正文副本。原子稿不作为 Wiki 默认入口。
@@ -30,7 +30,7 @@ Wiki 首页（`Home`）默认应链到 **PLAYBOOK + CURRENT + 最新 CHANGELOG +
 - [最近已发布正式版（稳定快照）· v2026.11.20](../blob/master/docs/ai-short-video/v2026.11.20/CHANGELOG.md)
 - [上一正式版 · v2026.11.14](../blob/master/docs/ai-short-video/v2026.11.14/CHANGELOG.md)
 - [基线大版摘要 · v2026.09.13](../blob/master/docs/ai-short-video/v2026.09.13/CHANGELOG.md)
-- [最新日摘要（每日最新可读）· 2026-11-26](../blob/master/docs/ai-short-video/inbox/2026-11-26/DIGEST.md)
+- [最新日摘要（每日最新可读）· 2026-11-27](../blob/master/docs/ai-short-video/inbox/2026-11-27/DIGEST.md)
 - [知识库总述](../blob/master/docs/ai-short-video/README.md)
 - [v0 脚手架 / inbox 溯源](../blob/master/docs/ai-short-video/v0/README.md)
 
